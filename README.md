@@ -1,0 +1,1 @@
+# Incident-handlers-journal-example-template
