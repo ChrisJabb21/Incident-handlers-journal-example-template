@@ -30,7 +30,7 @@ A template for an incident handler's journal template. Entries were created as p
 - List any follow-up tasks or actions required.
 
 
-## List of Entries
+# List of Entries
 Included below are my answers and analysis for the course in the form of entries using the incident handler template to conduct mock analysis work.
 
 ### Entry #1
