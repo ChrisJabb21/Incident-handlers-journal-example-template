@@ -1,6 +1,6 @@
 # Incident-handlers-journal-example-template
 A template for an incident handler's journal template. Entries were created as part of exercises for coursework on the Coursera Google Cybersecurity Professional certificate track.  
-Included are my answers and analysis for the course using the incident handler template provide to conduct mock analysis work.
+
 
 
 ## Incident Details
@@ -31,7 +31,7 @@ Included are my answers and analysis for the course using the incident handler t
 
 
 ## List of Entries
-
+Included below are my answers and analysis for the course in the form of entries using the incident handler template to conduct mock analysis work.
 
 ### Entry #1
 
