@@ -134,6 +134,86 @@ File Analysis results
 - [MalwareBazaar | SHA256 54e6ea47eb04634d3e87fd7787e2136ccfbcc80ade34f246a12cf93bab527f6b (BlackTech) (abuse.ch)](https://bazaar.abuse.ch/sample/54e6ea47eb04634d3e87fd7787e2136ccfbcc80ade34f246a12cf93bab527f6b/#iocs)
 
 
+### Entry #3
+
+- **Date and Time**: December 28, 2022, at 7:20 p.m., PT,
+- **Incident ID**: 03
+- **Description**: An organization experienced a security incident in which an individual was able to gain unauthorized access to customer PII and financial information by using forced browsing to exploit a vulnerability in the organization’s e-commerce web application. The incident investigation is within the Containment, eradication, and recovery, and Post-incident phases of the NIST Incident Response Lifecycle.
+-  **Tools used** :
+    - Web application logs and web server access logs associated with the incident for investigation.
+    - Incident final report for reference
+
+
+
+| Step | The 5 W's | Outcome |
+|------|--------------|---------|
+| 1    | **Who** caused the incident? | An individual using an external email address - Contacted an employee twice, claiming possession of stolen customer data - Demanded payments to prevent data leakage on public forums - Exploited a zero-day vulnerability in the organization’s e-commerce application |
+| 2    | **What** happened? | Threat actor sent two emails to the employee - First demand: $25,000 USD in cryptocurrency at 3:13 p.m. PT on December 22, 2022 - Second demand (December 28, 2022): Included a sample of stolen customer data - Increased payment demand to $50,000 USD - Employee notified the security team |
+| 3    | **When** did the incident occur? | December 28, 2022, at 7:20 p.m. PT |
+|  4   |   **Where** did the incident happen? | A mid-sized retail company |
+|  5   | **Why** did the incident happen? | - A web application vulnerability was exploited. This vulnerability was a forced browsing attack performed to access customer transaction data to collect and exfiltrate customer data by modifying the order number in the URL string of a purchase confirmation page of the affected e-commerce web application |
+---
+
+**Additional notes:**
+
+**Response and remediation:**
+
+The organization collaborated with the public relations department to disclose the data breach to its customers. Additionally, the organization offered free identity protection services to customers affected by the incident. 
+After the security team reviewed the associated web server logs, the cause of the attack was very clear. There was a single log source showing an exceptionally high volume of sequentially listed customer orders.
+
+**Recommendations:**
+To prevent future recurrences, taking the following actions are recommended:
+   -   Perform routine vulnerability scans and penetration testing.
+   -   Implement the following access control mechanisms:
+         -       Implement allowlisting to allow access to a specified set of URLs and automatically block all requests outside of this URL range.
+         -      Ensure that only authenticated users are authorized access to content.
+
+
+
+### Entry #4
+
+- **Date and Time**: December 28, 2022, at 7:20 p.m., PT
+- **Incident ID**: 04
+- **Description**: The possibility of security issues with an organization’s mail server are investigated and an analysis is conducted for any failed SSH logins for the root account on the mail server. The incident investigation occurred within the Detection and Analysis phase of the NIST Incident Response Lifecycle.
+-  **Tools used** :
+   -   Splunk Cloud SIEM tool
+   -   ZIP file containing relevant information in the time range and relevant to the incident: financial transactions, access, and authentication data log
+
+
+| Step | The 5 W's | Outcome |
+|------|--------------|---------|
+| 1    | **Who** caused the incident? | Possible password brute force attacks on several system user’s accounts on an email server |
+| 2    | **What** happened? | A large volume of failed SSH login attempts on the root account of the mail server and an investigation is conducted for any possible security issues |
+| 3    | **When** did the incident occur? |  8 days straight Between 2/27/23-3/6/23 and at the same time of 1:39:51.000 AM   |
+|  4   |   **Where** did the incident happen? | At the e-commerce store Buttercup Games  |
+|  5   | **Why** did the incident happen? |  Failed logins from many different IP addresses and port numbers for the past couple days occurring around the same time and out of the normal business hour time |
+---
+
+
+**Additional notes**: 
+
+<ins>Network hosts from which each event originated</ins>
+
+mailsv - Buttercup Games' mail server. Examine events generated from this host.
+www1 - One of Buttercup Games' web applications.
+www2 - One of Buttercup Games' web applications.
+www3 - One of Buttercup Games' web applications.
+vendor_sales - Information about Buttercup Games' retail sales.
+
+<ins>Source file and log file where the events were exported to for analysis </ins>
+- tutorialdata.zip: ./mailsv/secure.log
+
+Steps 
+- Narrow the search results for events from the mail server, mailsv 
+- Under SELECTED FIELDS, click or enter host and mailsv. The complete search term added to the search bar is now: index=main host=mailsv . The search results have narrowed to over 9000 events that are generated by the mail server.
+- Search for a failed login for root
+- Enter index=main host=mailsv fail* root into the search bar. This search expands on the search from the previous task and searches for the keyword fail*. The wildcard tells Splunk to expand the search term to find other terms that contain the word fail such as failure, failed, etc. Lastly, the keyword root searches for any event that contains the term root. The search results show about 346 failed loggin attempt events for the root account on the mail server
+- Look for any anomalous behavior
+
+Around the same times, sessions for the root account are being opened using the sudo su command by the following users: nsharpe, djohnson, and myuan to switch to the root user. The owners of these accounts will need to be notified and interviewed asap for the actions found with in the logs for the following that shows sudo commands being invoked to determine if the accounts were compromised from  a malicious hacker or 
+for possible foulplay.
+
+Thu Mar 06 2023 01:39:51 mailsv1 sudo: djohnson ; TTY=pts/0 ; PWD=/home/djohnson ; USER=root ; COMMAND=/bin/su
 
 
 
